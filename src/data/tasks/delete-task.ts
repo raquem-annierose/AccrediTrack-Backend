@@ -2,11 +2,11 @@ import { BadRequestError } from '@/utils/errors';
 import { taskDataManager } from './task-data-manager';
 
 export type DeleteTaskArgs = {
-  task_id: string;
+  task_id: number;
 };
 
-export function deleteTask(args: DeleteTaskArgs): string {
-  const res = taskDataManager.deleteTask(args.task_id);
+export async function deleteTask(args: DeleteTaskArgs): Promise<number> {
+  const res = await taskDataManager.deleteTask(args.task_id);
 
   if (!res) {
     throw new BadRequestError('Task ID not found!');

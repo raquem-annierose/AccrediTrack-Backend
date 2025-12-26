@@ -1,8 +1,8 @@
 import type { Task } from '@/types/Task';
 import { taskDataManager } from './task-data-manager';
 
-export function getTasks(): Task[] {
-  const tasks = taskDataManager.getTasks();
+export async function getTasks(): Promise<Task[]> {
+  const tasks = await taskDataManager.getTasks();
   return tasks;
 }
 
