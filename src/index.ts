@@ -11,6 +11,7 @@ import { logger } from './utils/logger';
 import { errorHandlerMiddleware } from './middlewares/error-handler';
 import { routes, type AppRoutes } from './controllers/routes';
 import { loggerHandlerMiddleware } from './middlewares/logger-middleware';
+import { checkConnection } from '@/data/connection/db';
 
 const app: Application = express();
 
@@ -53,6 +54,8 @@ if (isHttps) {
 } else {
   server = createHttpServer(app);
 }
+
+checkConnection();
 
 server.listen(envConfig.NODE_PORT, () => {
   logger.info(
