@@ -12,6 +12,7 @@ import { errorHandlerMiddleware } from './middlewares/error-handler';
 import { routes, type AppRoutes } from './controllers/routes';
 import { loggerHandlerMiddleware } from './middlewares/logger-middleware';
 import { checkConnection } from '@/data/connection/db';
+import { setProgramRoutes } from './routes/core/programRoutes';
 
 const app: Application = express();
 
@@ -23,6 +24,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(loggerHandlerMiddleware);
 
 // Set Security Headers
 app.use(helmet({ contentSecurityPolicy: process.env.NODE_ENV === 'production' ? true : false }));
@@ -40,6 +42,9 @@ app.use(loggerHandlerMiddleware);
 routes.forEach((route: AppRoutes) => {
   app.use(route.prefix, route.router);
 });
+
+// Register the program routes manually
+setProgramRoutes(app);
 
 // common error endpoint listener
 app.use(errorHandlerMiddleware);
