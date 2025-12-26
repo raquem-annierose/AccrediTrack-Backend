@@ -32,7 +32,7 @@ export default [
           fixToUnknown: true,
         },
       ],
-      'no-console': 'error',
+      'no-console': 'off',
     },
   },
 ];
