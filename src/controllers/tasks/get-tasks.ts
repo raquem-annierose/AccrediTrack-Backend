@@ -1,9 +1,13 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { getTasks } from '@/data/tasks/get-task';
 
-export function getTaskHandler(req: Request, res: Response) {
-  const tasks = getTasks();
-  res.status(200).json({ tasks });
+export async function getTaskHandler(req: Request, res: Response, next: NextFunction) {
+  try {
+    const tasks = await getTasks();
+    res.status(200).json({ tasks });
+  } catch (error) {
+    next(error);
+  }
 }
 
 export type GetTaskHandlerResponseType = typeof getTaskHandler;
