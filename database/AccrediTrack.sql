@@ -83,7 +83,7 @@ CREATE TABLE `accreditation_area_parameters` (
   `deleted_at` DATETIME NULL DEFAULT NULL
 );
 
-CREATE TABLE `accrediation_area_parameters_phases` (
+CREATE TABLE `accreditation_area_parameters_phases` (
   `id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `accreditation_area_parameter_id` INT(11) NOT NULL,
   `accreditation_phase_id` INT(11) NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE `accreditation_phases` (
 
 CREATE TABLE `accreditation_benchmarks` (
   `id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `accrediation_area_parameters_phase_id` INT(11) NOT NULL,
+  `accreditation_area_parameters_phase_id` INT(11) NOT NULL,
   `benchmark_title` VARCHAR(255) NULL DEFAULT NULL,
   `benchmark_code` VARCHAR(10) NULL DEFAULT NULL,
   `benchmark_description` VARCHAR(255) NULL DEFAULT NULL,
@@ -201,11 +201,11 @@ ALTER TABLE `accreditation_area_parameters` ADD FOREIGN KEY (`accreditation_area
 
 ALTER TABLE `accreditation_area_parameters` ADD FOREIGN KEY (`accreditation_cycle_program_id`) REFERENCES `accreditation_cycles_programs` (`id`);
 
-ALTER TABLE `accrediation_area_parameters_phases` ADD FOREIGN KEY (`accreditation_area_parameter_id`) REFERENCES `accreditation_area_parameters` (`id`);
+ALTER TABLE `accreditation_area_parameters_phases` ADD FOREIGN KEY (`accreditation_area_parameter_id`) REFERENCES `accreditation_area_parameters` (`id`);
 
-ALTER TABLE `accrediation_area_parameters_phases` ADD FOREIGN KEY (`accreditation_phase_id`) REFERENCES `accreditation_phases` (`id`);
+ALTER TABLE `accreditation_area_parameters_phases` ADD FOREIGN KEY (`accreditation_phase_id`) REFERENCES `accreditation_phases` (`id`);
 
-ALTER TABLE `accreditation_benchmarks` ADD FOREIGN KEY (`accrediation_area_parameters_phase_id`) REFERENCES `accrediation_area_parameters_phases` (`id`);
+ALTER TABLE `accreditation_benchmarks` ADD FOREIGN KEY (`accreditation_area_parameters_phase_id`) REFERENCES `accreditation_area_parameters_phases` (`id`);
 
 ALTER TABLE `benchmark_tasks` ADD FOREIGN KEY (`accreditation_benchmark_id`) REFERENCES `accreditation_benchmarks` (`id`);
 
