@@ -184,32 +184,7 @@ CREATE TABLE audit_logs (
 );
 
 -- ==========================================
--- 8. REF PHASES
--- ==========================================
--- Table to store the S-I-O categories
-CREATE TABLE ref_phases (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    code CHAR(1) NOT NULL, -- S, I, or O
-    name VARCHAR(50) NOT NULL, -- SYSTEM, IMPLEMENTATION, OUTCOMES
-    description VARCHAR(255) -- Full name: "System - Inputs and Processes"
-);
-
--- ==========================================
--- 9. BENCHMARKS
--- ==========================================
-CREATE TABLE benchmarks (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    parameter_id INT NOT NULL,
-    phase_id INT NOT NULL,
-    benchmark_code VARCHAR(10) NOT NULL, -- S.1, I.2, O.1
-    description TEXT NOT NULL,           -- The actual requirement text
-    
-    FOREIGN KEY (parameter_id) REFERENCES parameters(id),
-    FOREIGN KEY (phase_id) REFERENCES ref_phases(id)
-);
-
--- ==========================================
--- X. SEEDING
+-- 8. SEEDING
 -- ==========================================
 
 INSERT INTO programs (code, name) VALUES 
